@@ -1,0 +1,39 @@
+{
+	"name": "gatsby-plugin-component-to-image",
+	"version": "1.0.0",
+	"description": "A Gatsby plugin to generate images from React components. Useful for dynamically generating Open Graph images",
+	"author": "John Goodliff (https://johng.io)",
+	"keywords": [
+		"react",
+		"reactjs",
+		"seo",
+		"open-graph",
+		"react-components",
+		"gatsby",
+		"image-processing",
+		"image-generation",
+		"twitter-image",
+		"seo-optimization",
+		"gatsbyjs",
+		"gatsby-plugin",
+		"open-graph-protocol",
+		"open-graph-generator"
+	],
+	"license": "MIT",
+	"main": "./index.js",
+	"homepage": "https://github.com/jerboa88/gatsby-plugin-component-to-image",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jerboa88/gatsby-plugin-component-to-image.git"
+	},
+	"bugs": {
+		"url": "https://github.com/jerboa88/gatsby-plugin-component-to-image/issues"
+	},
+	"dependencies": {
+		"express": "^4.19.2",
+		"puppeteer": "^22.9.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.7.3"
+	}
+}
