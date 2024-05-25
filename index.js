@@ -1,9 +1,11 @@
 const { addJob, createPage } = require('./src/config');
 const { validateJobOptions } = require('./src/validator');
-const { success } = require('./src/logger');
+const { setVerbose, info } = require('./src/logger');
 
 // Exported function to create an image
 exports.createImage = (options) => {
+	setVerbose(options?.verbose);
+
 	const jobOptions = validateJobOptions(options);
 
 	createPage({
@@ -17,7 +19,7 @@ exports.createImage = (options) => {
 
 	addJob(jobOptions);
 
-	success(`Added ${jobOptions.imagePath} to job queue`);
+	info(`Added ${jobOptions.imagePath} to job queue`);
 
 	return jobOptions;
 };
