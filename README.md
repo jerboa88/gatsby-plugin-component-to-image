@@ -153,6 +153,17 @@ This plugin can be used for a variety of purposes, but we will show you how to u
 
 ### Options
 
+| **Option**         | **Description**                                                                                                                                                                                                                 | **Type**     | **Default** |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|-------------|
+| `pagePage`         | The destination path where the image component will be generated, relative to the `/public` directory. You may want to exclude this path from other plugins so that these components are not included in sitemaps, for example. | **required** |             |
+| `imagePath`        | The destination path of the image itself, relative to the `/public` directory. Include the file extension in the path.                                                                                                          | **required** |             |
+| `component`        | A path to the component used to generate the image.                                                                                                                                                                             | **required** |             |
+| `context`          | Additional context to pass to the image component. You can include any kind of data here that you want to include in your image so that you can access it later from the image component.                                       | _optional_   | {}          |
+| `size.width`       | The width of the image in pixels. This value must be between 1 and 16383.                                                                                                                                                       | _optional_   | 1200        |
+| `size.height`      | The height of the image in pixels. This value must be between 1 and 16383.                                                                                                                                                      | _optional_   | 630         |
+| `type`             | The file type of the image. This can be one of 'png', 'jpeg', or 'webp'.                                                                                                                                                        | _optional_   | 'png'       |
+| `quality`          | The quality of the image. The has no effect on PNG images. This value must be between 0 and 100.                                                                                                                                | _optional_   | undefined   |
+| `optimizeForSpeed` | Whether Puppeteer should optimize image encoding for speed instead of file size.                                                                                                                                                | _optional_   | false       |
 
 
 ## Contributing
