@@ -48,6 +48,8 @@ This plugin was inspired by similar plugins for generating Open Graph images lik
     - `bun add github:jerboa88/gatsby-plugin-component-to-image`
 2. Add the plugin to your `gatsby-config.js` file:
     ```js
+    // gatsby-config.js
+
     module.exports = {
       plugins: [
         'gatsby-plugin-component-to-image',
@@ -57,7 +59,75 @@ This plugin was inspired by similar plugins for generating Open Graph images lik
 
 
 ## Usage
-...
+1. Create a component for your image. This component should render the content you want in your image. For example, to create an Open Graph image for a blog post, you could create a component like this:
+    ```tsx
+    // src/templates/og-image/blog-post.tsx
+
+    import React from 'react';
+    import { graphql } from 'gatsby';
+
+    const BlogPostOGImage = ({ pageContext }) => {
+      const { title, description, postDate } = pageContext;
+      const { size } = pageContext.imageMetadata;
+
+      return (
+        <div style={{
+          maxWidth: size.width,
+          maxHeight: size.height,
+          padding: '1rem',
+          backgroundColor: 'white', 
+          textAlign: 'center' }}>
+          <h1>{title}</h1>
+          <p>{description}</p>
+          <p>Published on {postDate}</p>
+        </div>
+      );
+    };
+
+    export default BlogPostOGImage;
+    ```
+
+    The `pageContext` prop is passed to the component by Gatsby when the image is generated. It contains details about the generated image in `imageMetadata` that you can use to style your component, as well as any other data you passed to the `createImage()` function via the `context` prop.
+    
+    In this example, we use the `size` property from `imageMetadata` to set the maximum width and height of the image, and we use the `title`, `description`, and `postDate` properties from `pageContext` to customize the content of the image for each blog post.
+
+2. Call the `createImage()` function from `gatsby-node.js` with your desired options. For example, to generate an Open Graph image for a blog post, you could use the following code:
+    ```js
+    // gatsby-node.js
+
+    import { resolve, join } from 'path';
+    import { createImage } from 'gatsby-plugin-component-to-image';
+
+    export const createPages = async ({ actions }) => {
+
+      // ...
+
+      const imageMetadata = createImage({
+        pagePath: join('/', '__generated', 'open-graph', 'blog-post-1'),
+        imagePath: join('/', 'images', 'open-graph', `blog-post-1.png`),
+        component: resolve('./src/templates/og-image/blog-post.tsx'),
+        size: {
+          width: 1200,
+          height: 630,
+        },
+        context: {
+          title: 'Blog Post 1',
+          description: 'This is a blog post',
+          postDate: '2022-01-01',
+        },
+      });
+
+      // ...
+
+    };
+    ```
+    The function will return an object with the metadata for the image. If you don't specify certain options, the plugin will use default values which will be returned here.
+
+    For example, the metadata object can be used to:
+    - Pass the image URL to your page template so that you can use the image in your Open Graph meta tags
+    - Add nodes to the GraphQL schema so that you can query the image metadata in your components
+
+3. Run `gatsby build` to generate the image. The image will be saved to the path you specified with the `imagePath` option
 
 
 ## Contributing
