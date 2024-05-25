@@ -166,6 +166,8 @@ This plugin can be used for a variety of purposes, but we will show you how to u
 | `type`             | The file type of the image. This can be one of 'png', 'jpeg', 'webp', or 'pdf'.                                                                                                                                                 | _optional_   | 'png'       |
 | `quality`          | The quality of the image. The has no effect on PNG images or PDFs. This value must be between 0 and 100.                                                                                                                        | _optional_   | undefined   |
 | `optimizeForSpeed` | Whether Puppeteer should optimize image encoding for speed instead of file size. This has no effect on PDFs.                                                                                                                    | _optional_   | false       |
+| `verbose`          | Whether to enable verbose logging.                                                                                                                                                                                              | _optional_   | false       |
+
 
 
 ## Contributing
