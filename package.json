@@ -1,7 +1,7 @@
 {
 	"name": "gatsby-plugin-component-to-image",
 	"version": "1.0.0",
-	"description": "A Gatsby plugin to generate images from React components. Useful for dynamically generating Open Graph images",
+	"description": "A Gatsby plugin to generate images from React components",
 	"author": "John Goodliff (https://johng.io)",
 	"keywords": [
 		"react",
