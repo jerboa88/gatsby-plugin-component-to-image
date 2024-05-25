@@ -89,15 +89,15 @@ function validateType(newType) {
 	}
 
 	assertIsOfType('type', newType, 'string');
-	assertIsOneOf('type', newType, ['png', 'jpeg', 'webp']);
+	assertIsOneOf('type', newType, ['png', 'jpeg', 'webp', 'pdf']);
 
-	return type;
+	return newType;
 }
 
 function validateQuality(newQuality, newType) {
 	// Quality is only relevant for JPEG and WebP images
 	// If quality and the type is PNG, Puppetter will complain
-	if (newType === 'png') {
+	if (['png', 'pdf'].includes(newType)) {
 		return undefined;
 	}
 

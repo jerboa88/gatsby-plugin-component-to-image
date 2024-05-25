@@ -64,17 +64,27 @@ async function processJob(browser, host, jobOptions) {
 	await page.goto(url, {
 		waitUntil: PUPPETEER_WAIT_CONDITION,
 	});
-	await page.screenshot({
-		path: imagePath,
-		clip: {
-			...size,
-			x: 0,
-			y: 0,
-		},
-		type,
-		quality,
-		optimizeForSpeed,
-	});
+
+	if (type === 'pdf') {
+		await page.pdf({
+			path: imagePath,
+			width: size.width,
+			height: size.height,
+			printBackground: true,
+		});
+	} else {
+		await page.screenshot({
+			path: imagePath,
+			clip: {
+				...size,
+				x: 0,
+				y: 0,
+			},
+			type,
+			quality,
+			optimizeForSpeed,
+		});
+	}
 
 	updateActivity(imagePath);
 }
