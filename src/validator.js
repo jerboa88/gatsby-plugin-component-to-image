@@ -6,6 +6,7 @@ const {
 } = require('./utilities');
 
 const DEFAULTS = {
+	verbose: false,
 	context: {},
 	size: {
 		width: 1200,
@@ -24,6 +25,16 @@ function setDefaultConfig(newDefaultConfig) {
 	currentConfig.optimizeForSpeed = validateOptimizeForSpeed(
 		newDefaultConfig?.optimizeForSpeed,
 	);
+}
+
+function validateVerbose(newVerbose) {
+	if (isUndefined(newVerbose)) {
+		return DEFAULTS.verbose;
+	}
+
+	assertIsOfType('verbose', newVerbose, 'boolean');
+
+	return newVerbose;
 }
 
 function validatePagePath(newPagePath) {
@@ -148,4 +159,5 @@ function validateJobOptions(newJobOptions) {
 module.exports = {
 	setDefaultConfig,
 	validateJobOptions,
+	validateVerbose,
 };
