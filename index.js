@@ -2,7 +2,7 @@ const { addJob, createPage } = require('./src/config');
 const { validateJobOptions } = require('./src/validator');
 const { success } = require('./src/logger');
 
-// Exported function to create a social image
+// Exported function to create an image
 exports.createImage = (options) => {
 	const jobOptions = validateJobOptions(options);
 
@@ -11,7 +11,7 @@ exports.createImage = (options) => {
 		component: jobOptions.component,
 		context: {
 			...jobOptions.context,
-			socialImageMetadata: jobOptions,
+			imageMetadata: jobOptions,
 		},
 	});
 

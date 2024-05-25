@@ -100,9 +100,9 @@ async function takedown(server, browser) {
 	server.close();
 }
 
-// Generate social images for all jobs in the queue
-async function generateSocialImages() {
-	startActivity('Generating social images');
+// Generate images for all jobs in the queue
+async function generateImages() {
+	startActivity('Generating images');
 	updateActivity('Setting up');
 
 	const { server, browser, host, jobList } = await setup();
@@ -114,9 +114,9 @@ async function generateSocialImages() {
 	await takedown(server, browser);
 
 	endActivity();
-	success('Social images generated');
+	success('Images generated successfully');
 }
 
 module.exports = {
-	generateSocialImages,
+	generateImages,
 };
