@@ -1,23 +1,17 @@
 const { getDefaultOptions } = require('./config');
 const { getPackageName } = require('./utilities');
-const { validateVerbose } = require('./validator');
 
 const LOG_PREFIX = `${getPackageName()}: `;
 
 let reporter;
 let activity;
-let verbose;
 
 function setReporter(newReporter) {
 	reporter = newReporter;
 }
 
-function setVerbose(newVerbose) {
-	verbose = validateVerbose(newVerbose, getDefaultOptions().verbose);
-}
-
 function info(message) {
-	verbose && reporter?.info(`${LOG_PREFIX}${message}`);
+	getDefaultOptions().verbose && reporter?.info(`${LOG_PREFIX}${message}`);
 }
 
 function success(message) {
@@ -55,7 +49,6 @@ function endActivity() {
 
 module.exports = {
 	setReporter,
-	setVerbose,
 	success,
 	info,
 	warn,

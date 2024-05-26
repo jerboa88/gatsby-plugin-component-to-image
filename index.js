@@ -9,8 +9,6 @@ const { validateJobOptions } = require('./src/validator');
 
 // Public function for creating a single image
 function createImage(options) {
-	setVerbose(options?.verbose);
-
 	const jobOptions = validateJobOptions(options, getDefaultOptions());
 
 	createPage({
