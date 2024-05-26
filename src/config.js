@@ -21,6 +21,8 @@ function getDefaultOptions() {
 
 function setDefaultOptions(newDefaultOptions) {
 	defaultOptions = validateDefaultOptions(newDefaultOptions, defaultOptions);
+
+	return defaultOptions;
 }
 
 function addJob(job) {
