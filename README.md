@@ -166,7 +166,9 @@ This plugin can be used for a variety of purposes, but we will show you how to u
 
 ### Options
 
-If you want to generate multiple images with the same options, you can set default options that will be reused every time you call `createImage()`. You can either set default options for the plugin in `gatsby-config.js`:
+If you want to generate multiple images with the same options, you can set default options that will be reused every time you call `createImage()`.
+
+You can either set default options for the plugin in `gatsby-config.js`:
 
 ```js
 // gatsby-config.js
@@ -205,11 +207,12 @@ setDefaultOptions({
 });
 ```
 
-These options can also be set directly in the `createImage()` function, which will override any default options you have set previously.
+Most of these options can also be set directly in the `createImage()` function. Doing this will override any default options you have set previously.
+
 
 #### Common Options
 
-These options can either be set in the plugin options in `gatsby-config.js`, set using the `setDefaultOptions()` function, or passed to the `createImage()` function.
+These options can either be set via the plugin options in `gatsby-config.js`, using the `setDefaultOptions()` function, or passed to the `createImage()` function.
 
 > [!NOTE]
 > `component` is a required option but it has no default value. Make sure to either set in the default options or pass it to the `createImage()` function.
@@ -223,7 +226,16 @@ These options can either be set in the plugin options in `gatsby-config.js`, set
 | `type`             | The file type of the image. This can be one of 'png', 'jpeg', 'webp', or 'pdf'.                                                                                                           | _optional_   | 'png'       |
 | `quality`          | The quality of the image. The has no effect on PNG images or PDFs. This value must be between 0 and 100.                                                                                  | _optional_   | undefined   |
 | `optimizeForSpeed` | Whether Puppeteer should optimize image encoding for speed instead of file size. This has no effect on PDFs.                                                                              | _optional_   | false       |
-| `verbose`          | Whether to enable verbose logging.                                                                                                                                                        | _optional_   | false       |
+
+
+#### Plugin Options
+
+These options must either be set via the plugin options in `gatsby-config.js` or using the `setDefaultOptions()` function.
+
+
+| **Option** | **Description**                    | **Type**   | **Default** |
+| ---------- | ---------------------------------- | ---------- | ----------- |
+| `verbose`  | Whether to enable verbose logging. | _optional_ | false       |
 
 #### Job Options
 
