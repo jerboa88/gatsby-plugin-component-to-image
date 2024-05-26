@@ -26,17 +26,17 @@
 ### Why?
 
 This plugin was inspired by similar plugins for generating Open Graph images like [gatsby-plugin-open-graph-images], [gatsby-plugin-satorare], and [gatsby-remark-twitter-cards], but is designed to be more flexible:
-- Unlike [gatsby-remark-twitter-cards], the card style is not limited by the plugin options. You can create a component for your Open Graph image with the exact style you want, and then use this plugin to generate the image
+- Unlike [gatsby-remark-twitter-cards], the card style is not limited by the plugin options. You can create a component for your Open Graph image with the exact style you want, and then use this plugin to generate the image.
 - [gatsby-plugin-satorare] used [vercel/satori] internally to generate SVG images from your JSX markup, which is very cool, but there are some limitations with this approach:
-	- Satori only accepts JSX elements that are pure and stateless, which will cause issues if you use hooks or context in your component
-	- Satori only supports a subset of the CSS spec, so your component may not render as expected if you use unsupported CSS properties
-	- Using CSS-in-JS libraries like Tailwind CSS or Styled Components requires complex setup to get working with Satori, and rewriting your component with inline styles is not always feasible
+	- Satori only accepts JSX elements that are pure and stateless, which will cause issues if you use hooks or context in your component.
+	- Satori only supports a subset of the CSS spec, so your component may not render as expected if you use unsupported CSS properties.
+	- Using CSS-in-JS libraries like Tailwind CSS or Styled Components requires complex setup to get working with Satori, and rewriting your component with inline styles is not always feasible.
 	
-	This plugin uses [Puppeteer] to render your component in a headless browser, so any React component should work with this plugin
-- Unlike [gatsby-plugin-open-graph-images], you have full control over the output path and file type of the generated images. The path of the generated pages can also be set so that you can exclude them from your sitemap, or reuse them for other purposes. Because of this, you can use this plugin to generate images for any purpose, not just Open Graph images
+	This plugin uses [Puppeteer] to render your component in a headless browser, so any React component should work with this plugin.
+- Unlike [gatsby-plugin-open-graph-images], you have full control over the output path and file type of the generated images. The path of the generated pages can also be set so that you can exclude them from your sitemap, or reuse them for other purposes. Because of this, you can use this plugin to generate images for any purpose, not just Open Graph images.
 
 ### How?
-1. When you call the `createImage` function from `gatsby-node.js`, we save the options for that image/PDF and generate a regular Gatsby page from the component you provided
+1. When you call the `createImage` function from `gatsby-node.js`, we save the options for that image/PDF and generate a regular Gatsby page from the component you provided.
 2. When the page is built, we use Puppeteer to render the page in a headless browser and, using the options you provided, either:
    1. save a screenshot of the rendered component as an image, or
    2. print the page to a PDF file
@@ -44,9 +44,9 @@ This plugin was inspired by similar plugins for generating Open Graph images lik
 
 ## Installation
 1. Install the plugin with your favorite package manager:
-	- `npm install jerboa88/gatsby-plugin-component-to-image` or
-	- `yarn add jerboa88/gatsby-plugin-component-to-image` or
-	- `pnpm add jerboa88/gatsby-plugin-component-to-image` or
+	- `npm install jerboa88/gatsby-plugin-component-to-image`, or
+	- `yarn add jerboa88/gatsby-plugin-component-to-image`, or
+	- `pnpm add jerboa88/gatsby-plugin-component-to-image`, or
 	- `bun add github:jerboa88/gatsby-plugin-component-to-image`
 2. Add the plugin to your `gatsby-config.js` file:
 	```js
@@ -55,6 +55,23 @@ This plugin was inspired by similar plugins for generating Open Graph images lik
 	module.exports = {
 		plugins: [
 			'gatsby-plugin-component-to-image',
+		],
+	}
+	```
+
+	You can also set default options for the plugin here:
+	```js
+	// gatsby-config.js
+
+	module.exports = {
+		plugins: [
+			{
+				resolve: 'gatsby-plugin-component-to-image',
+				options: {
+					type: 'jpeg',
+					quality: 95,
+				},
+			},
 		],
 	}
 	```
@@ -108,9 +125,6 @@ This plugin can be used for a variety of purposes, but we will show you how to u
 	import { createImage } from 'gatsby-plugin-component-to-image';
 
 	export const createPages = async ({ actions }) => {
-
-		// ...
-
 		// Example blog post details. You could get this data from a CMS or other source
 		const blogPostDetails = {
 			title: 'Blog Post 1',
@@ -139,35 +153,86 @@ This plugin can be used for a variety of purposes, but we will show you how to u
 				imageMetadata: imageMetadata,
 			}
 		});
-
-		// ...
-
 	};
 	```
 	The function will return an object with the metadata for the image. If you don't specify certain options, the plugin will use default values which will be returned here.
 
 	For example, the metadata object can be used to:
-	- Pass the image URL to your page template so that you can use the image in your Open Graph meta tags
-	- Add nodes to the GraphQL schema so that you can query the image metadata in your components
+	- pass the image URL to your page template so that you can use the image in your Open Graph meta tags, or
+	- add nodes to the GraphQL schema so that you can query the image metadata in your components
 
 3. Run `gatsby build` to generate the image. The image will be saved to the path you specified with the `imagePath` option
 
 
 ### Options
 
-| **Option**         | **Description**                                                                                                                                                                                                                 | **Type**     | **Default** |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ----------- |
-| `pagePage`         | The destination path where the image component will be generated, relative to the `/public` directory. You may want to exclude this path from other plugins so that these components are not included in sitemaps, for example. | **required** |             |
-| `imagePath`        | The destination path of the image itself, relative to the `/public` directory. This should include the file extension of the image.                                                                                             | **required** |             |
-| `component`        | A path to the component used to generate the image.                                                                                                                                                                             | **required** |             |
-| `context`          | Additional context to pass to the image component. You can include any kind of data here that you want to include in your image so that you can access it later from the image component.                                       | _optional_   | {}          |
-| `size.width`       | The width of the image in pixels. This value must be between 1 and 16383.                                                                                                                                                       | _optional_   | 1200        |
-| `size.height`      | The height of the image in pixels. This value must be between 1 and 16383.                                                                                                                                                      | _optional_   | 630         |
-| `type`             | The file type of the image. This can be one of 'png', 'jpeg', 'webp', or 'pdf'.                                                                                                                                                 | _optional_   | 'png'       |
-| `quality`          | The quality of the image. The has no effect on PNG images or PDFs. This value must be between 0 and 100.                                                                                                                        | _optional_   | undefined   |
-| `optimizeForSpeed` | Whether Puppeteer should optimize image encoding for speed instead of file size. This has no effect on PDFs.                                                                                                                    | _optional_   | false       |
-| `verbose`          | Whether to enable verbose logging.                                                                                                                                                                                              | _optional_   | false       |
+If you want to generate multiple images with the same options, you can set default options that will be reused every time you call `createImage()`. You can either set default options for the plugin in `gatsby-config.js`:
 
+```js
+// gatsby-config.js
+
+module.exports = {
+	plugins: [
+		{
+			resolve: 'gatsby-plugin-component-to-image',
+			options: {
+				type: 'webp',
+				quality: 100,
+				context: {
+					siteName: 'My Example Site',
+				},
+				verbose: true,
+			},
+		},
+	],
+}
+```
+
+or call the `setDefaultOptions()` function in `gatsby-node.js`:
+
+```js
+// gatsby-node.js
+
+import { setDefaultOptions } from 'gatsby-plugin-component-to-image';
+
+setDefaultOptions({
+	type: 'webp',
+	quality: 100,
+	context: {
+		siteName: 'My Example Site',
+	},
+	verbose: true,
+});
+```
+
+These options can also be set directly in the `createImage()` function, which will override any default options you have set previously.
+
+#### Common Options
+
+These options can either be set in the plugin options in `gatsby-config.js`, set using the `setDefaultOptions()` function, or passed to the `createImage()` function.
+
+> [!NOTE]
+> `component` is a required option but it has no default value. Make sure to either set in the default options or pass it to the `createImage()` function.
+
+| **Option**         | **Description**                                                                                                                                                                           | **Type**     | **Default** |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ----------- |
+| `component`        | A path to the component used to generate the image.                                                                                                                                       | **required** |             |
+| `context`          | Additional context to pass to the image component. You can include any kind of data here that you want to include in your image so that you can access it later from the image component. | _optional_   | {}          |
+| `size.width`       | The width of the image in pixels. This value must be between 1 and 16383.                                                                                                                 | _optional_   | 1200        |
+| `size.height`      | The height of the image in pixels. This value must be between 1 and 16383.                                                                                                                | _optional_   | 630         |
+| `type`             | The file type of the image. This can be one of 'png', 'jpeg', 'webp', or 'pdf'.                                                                                                           | _optional_   | 'png'       |
+| `quality`          | The quality of the image. The has no effect on PNG images or PDFs. This value must be between 0 and 100.                                                                                  | _optional_   | undefined   |
+| `optimizeForSpeed` | Whether Puppeteer should optimize image encoding for speed instead of file size. This has no effect on PDFs.                                                                              | _optional_   | false       |
+| `verbose`          | Whether to enable verbose logging.                                                                                                                                                        | _optional_   | false       |
+
+#### Job Options
+
+These options must be passed to the `createImage()` function.
+
+| **Option**  | **Description**                                                                                                                                                                                                                 | **Type**     | **Default** |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ----------- |
+| `pagePage`  | The destination path where the image component will be generated, relative to the `/public` directory. You may want to exclude this path from other plugins so that these components are not included in sitemaps, for example. | **required** |             |
+| `imagePath` | The destination path of the image itself, relative to the `/public` directory. This should include the file extension of the image.                                                                                             | **required** |             |
 
 
 ## Contributing
