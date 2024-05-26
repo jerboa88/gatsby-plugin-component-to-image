@@ -17,7 +17,9 @@
 		"gatsbyjs",
 		"gatsby-plugin",
 		"open-graph-protocol",
-		"open-graph-generator"
+		"open-graph-generator",
+		"pdf",
+		"pdf-generation"
 	],
 	"license": "MIT",
 	"main": "./index.js",
