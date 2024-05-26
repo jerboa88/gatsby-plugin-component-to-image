@@ -1,11 +1,19 @@
-const { setVerbose, info } = require('./src/logger');
+const { info } = require('./src/logger');
 const {
 	getDefaultOptions,
-	setDefaultOptions,
+	setDefaultOptions: configSetDefaultOptions,
 	addJob,
 	createPage,
 } = require('./src/config');
 const { validateJobOptions } = require('./src/validator');
+const { prettify } = require('./src/utilities');
+
+// Public function for setting default options
+function setDefaultOptions(options) {
+	const defaultOptions = configSetDefaultOptions(options);
+
+	info(`Default options set to:\n${prettify(defaultOptions)}`);
+}
 
 // Public function for creating a single image
 function createImage(options) {
