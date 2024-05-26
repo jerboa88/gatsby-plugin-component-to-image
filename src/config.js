@@ -1,6 +1,27 @@
+const { validateDefaultOptions } = require('./validator');
+
 const jobQueue = [];
 
 let gatsbyCreatePageFunction;
+let defaultOptions = {
+	verbose: false,
+	context: {},
+	size: {
+		width: 1200,
+		height: 630,
+	},
+	type: 'png',
+	quality: undefined,
+	optimizeForSpeed: false,
+};
+
+function getDefaultOptions() {
+	return defaultOptions;
+}
+
+function setDefaultOptions(newDefaultOptions) {
+	defaultOptions = validateDefaultOptions(newDefaultOptions, defaultOptions);
+}
 
 function addJob(job) {
 	jobQueue.push(job);
@@ -21,6 +42,8 @@ function createPage(...args) {
 }
 
 module.exports = {
+	getDefaultOptions,
+	setDefaultOptions,
 	addJob,
 	getAllJobs,
 	setGatsbyCreatePageFunction,

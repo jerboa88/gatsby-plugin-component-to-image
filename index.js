@@ -1,12 +1,17 @@
-const { addJob, createPage } = require('./src/config');
-const { validateJobOptions } = require('./src/validator');
 const { setVerbose, info } = require('./src/logger');
+const {
+	getDefaultOptions,
+	setDefaultOptions,
+	addJob,
+	createPage,
+} = require('./src/config');
+const { validateJobOptions } = require('./src/validator');
 
-// Exported function to create an image
-exports.createImage = (options) => {
+// Public function for creating a single image
+function createImage(options) {
 	setVerbose(options?.verbose);
 
-	const jobOptions = validateJobOptions(options);
+	const jobOptions = validateJobOptions(options, getDefaultOptions());
 
 	createPage({
 		path: jobOptions.pagePath,
@@ -22,4 +27,9 @@ exports.createImage = (options) => {
 	info(`Added ${jobOptions.imagePath} to job queue`);
 
 	return jobOptions;
+}
+
+module.exports = {
+	setDefaultOptions,
+	createImage,
 };

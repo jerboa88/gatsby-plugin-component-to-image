@@ -799,9 +799,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gatsby-plugin-social-images@workspace:.":
+"gatsby-plugin-component-to-image@workspace:.":
   version: 0.0.0-use.local
-  resolution: "gatsby-plugin-social-images@workspace:."
+  resolution: "gatsby-plugin-component-to-image@workspace:."
   dependencies:
     "@biomejs/biome": "npm:1.7.3"
     express: "npm:^4.19.2"
