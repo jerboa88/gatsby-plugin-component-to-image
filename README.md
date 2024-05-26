@@ -50,11 +50,11 @@ This plugin was inspired by similar plugins for generating Open Graph images lik
 	```
 
 	```sh
-	yarn add jerboa88/gatsby-plugin-component-to-image			# yarn
+	yarn add jerboa88/gatsby-plugin-component-to-image		# yarn
 	```
 
 	```sh
-	pnpm add jerboa88/gatsby-plugin-component-to-image			# pnpm
+	pnpm add jerboa88/gatsby-plugin-component-to-image		# pnpm
 	```
 
 	```sh
