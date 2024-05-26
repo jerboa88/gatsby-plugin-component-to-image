@@ -44,10 +44,23 @@ This plugin was inspired by similar plugins for generating Open Graph images lik
 
 ## Installation
 1. Install the plugin with your favorite package manager:
-	- `npm install jerboa88/gatsby-plugin-component-to-image`, or
-	- `yarn add jerboa88/gatsby-plugin-component-to-image`, or
-	- `pnpm add jerboa88/gatsby-plugin-component-to-image`, or
-	- `bun add github:jerboa88/gatsby-plugin-component-to-image`
+
+	```sh
+	npm install jerboa88/gatsby-plugin-component-to-image		# npm
+	```
+
+	```sh
+	yarn add jerboa88/gatsby-plugin-component-to-image			# yarn
+	```
+
+	```sh
+	pnpm add jerboa88/gatsby-plugin-component-to-image			# pnpm
+	```
+
+	```sh
+	bun add github:jerboa88/gatsby-plugin-component-to-image	# bun
+	```
+
 2. Add the plugin to your `gatsby-config.js` file:
 	```js
 	// gatsby-config.js
