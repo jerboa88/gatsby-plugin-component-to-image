@@ -30,6 +30,18 @@ function getSchemaWithDefaultValue(schema, defaultValue) {
 	return schema.default(defaultValue);
 }
 
+function getPluginOptionsSchema() {
+	return Joi.object({
+		verbose: schema.verbose,
+		component: schema.component,
+		context: schema.context,
+		size: schema.size,
+		type: schema.type,
+		quality: schema.quality,
+		optimizeForSpeed: schema.optimizeForSpeed,
+	});
+}
+
 function validateVerbose(newVerbose, defaultVerbose) {
 	const verboseSchema = getSchemaWithDefaultValue(
 		schema.verbose,
@@ -114,6 +126,7 @@ function validateJobOptions(newJobOptions, defaultOptions) {
 
 module.exports = {
 	setJoi,
+	getPluginOptionsSchema,
 	validateDefaultOptions,
 	validateJobOptions,
 	validateVerbose,

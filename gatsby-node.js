@@ -1,7 +1,7 @@
 const { setReporter } = require('./src/logger');
 const { setGatsbyCreatePageFunction } = require('./src/config');
 const { generateImages } = require('./src/generator');
-const { setJoi } = require('./src/validator');
+const { setJoi, getPluginOptionsSchema } = require('./src/validator');
 
 // Save the reporter and createPage function for later use
 exports.onPluginInit = async ({ reporter, actions: { createPage } }) => {
@@ -14,7 +14,7 @@ exports.pluginOptionsSchema = ({ Joi }) => {
 	setJoi(Joi);
 
 	// TODO: Add validation for plugin options
-	return Joi.object({});
+	return getPluginOptionsSchema();
 };
 
 // Generate images after pages have been built
