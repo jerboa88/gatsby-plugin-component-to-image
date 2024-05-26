@@ -42,15 +42,6 @@ function getPluginOptionsSchema() {
 	});
 }
 
-function validateVerbose(newVerbose, defaultVerbose) {
-	const verboseSchema = getSchemaWithDefaultValue(
-		schema.verbose,
-		defaultVerbose,
-	);
-
-	return Joi.attempt(newVerbose, verboseSchema);
-}
-
 function validateDefaultOptions(newDefaultOptions, defaultOptions) {
 	// Build Joi schemas
 	const newSchema = {
@@ -129,5 +120,4 @@ module.exports = {
 	getPluginOptionsSchema,
 	validateDefaultOptions,
 	validateJobOptions,
-	validateVerbose,
 };

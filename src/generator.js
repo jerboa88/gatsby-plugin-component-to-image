@@ -81,7 +81,7 @@ async function processJob(browser, host, jobOptions) {
 				y: 0,
 			},
 			type,
-			quality,
+			quality: type === 'png' ? undefined : quality,
 			optimizeForSpeed,
 		});
 	}
