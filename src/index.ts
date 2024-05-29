@@ -1,22 +1,17 @@
-const { info } = require('./src/logger');
-const {
-	getDefaultOptions,
-	setDefaultOptions: configSetDefaultOptions,
-	addJob,
-	createPage,
-} = require('./src/config');
-const { validateJobOptions } = require('./src/validator');
-const { prettify } = require('./src/utilities');
+import { info } from './logger';
+import { getDefaultOptions, setDefaultOptions as configSetDefaultOptions, addJob, createPage } from './config';
+import { validateJobOptions } from './validator';
+import { prettify } from './utilities';
 
 // Public function for setting default options
-function setDefaultOptions(options) {
+export function setDefaultOptions(options) {
 	const defaultOptions = configSetDefaultOptions(options);
 
 	info(`Default options set to:\n${prettify(defaultOptions)}`);
 }
 
 // Public function for creating a single image
-function createImage(options) {
+export function createImage(options) {
 	const jobOptions = validateJobOptions(options, getDefaultOptions());
 
 	createPage({
@@ -34,8 +29,3 @@ function createImage(options) {
 
 	return jobOptions;
 }
-
-module.exports = {
-	setDefaultOptions,
-	createImage,
-};

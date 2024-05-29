@@ -1,60 +1,46 @@
-const { getDefaultOptions } = require('./config');
-const { getPackageName } = require('./utilities');
+import { getDefaultOptions } from './config';
+import { getPackageName } from './utilities';
 
 const LOG_PREFIX = `${getPackageName()}: `;
 
 let reporter;
 let activity;
 
-function setReporter(newReporter) {
+export function setReporter(newReporter) {
 	reporter = newReporter;
 }
 
-function info(message) {
+export function info(message) {
 	getDefaultOptions().verbose && reporter?.info(`${LOG_PREFIX}${message}`);
 }
 
-function success(message) {
+export function success(message) {
 	reporter?.success(`${LOG_PREFIX}${message}`);
 }
 
-function warn(message) {
+export function warn(message) {
 	reporter?.warn(`${LOG_PREFIX}${message}`);
 }
 
-function error(message) {
+export function error(message) {
 	reporter?.error(`${LOG_PREFIX}${message}`);
 }
 
-function panic(message) {
+export function panic(message) {
 	reporter?.panic(`${LOG_PREFIX}${message}`);
 }
 
-function startActivity(timerText) {
+export function startActivity(timerText) {
 	activity = reporter?.activityTimer(`${LOG_PREFIX}${timerText}`);
-
 	activity?.start();
 }
 
-function updateActivity(statusText) {
+export function updateActivity(statusText) {
 	activity?.setStatus(statusText);
 }
 
-function endActivity() {
+export function endActivity() {
 	activity?.setStatus('');
 	activity?.end();
-
 	activity = null;
 }
-
-module.exports = {
-	setReporter,
-	success,
-	info,
-	warn,
-	error,
-	panic,
-	startActivity,
-	updateActivity,
-	endActivity,
-};

@@ -1,9 +1,17 @@
-const { isUndefined } = require('./utilities');
+import { isUndefined } from './utilities';
 
 let Joi;
 let schema;
 
-function setJoi(newJoi) {
+function getSchemaWithDefaultValue(schema, defaultValue) {
+	if (isUndefined(defaultValue)) {
+		return schema;
+	}
+
+	return schema.default(defaultValue);
+}
+
+export function setJoi(newJoi) {
 	Joi = newJoi;
 
 	schema = {
@@ -22,15 +30,7 @@ function setJoi(newJoi) {
 	};
 }
 
-function getSchemaWithDefaultValue(schema, defaultValue) {
-	if (isUndefined(defaultValue)) {
-		return schema;
-	}
-
-	return schema.default(defaultValue);
-}
-
-function getPluginOptionsSchema() {
+export function getPluginOptionsSchema() {
 	return Joi.object({
 		verbose: schema.verbose,
 		component: schema.component,
@@ -42,7 +42,7 @@ function getPluginOptionsSchema() {
 	});
 }
 
-function validateDefaultOptions(newDefaultOptions, defaultOptions) {
+export function validateDefaultOptions(newDefaultOptions, defaultOptions) {
 	// Build Joi schemas
 	const newSchema = {
 		verbose: undefined,
@@ -76,7 +76,7 @@ function validateDefaultOptions(newDefaultOptions, defaultOptions) {
 	};
 }
 
-function validateJobOptions(newJobOptions, defaultOptions) {
+export function validateJobOptions(newJobOptions, defaultOptions) {
 	// Build Joi schemas
 	const newSchema = {
 		pagePath: undefined,
@@ -114,10 +114,3 @@ function validateJobOptions(newJobOptions, defaultOptions) {
 		),
 	};
 }
-
-module.exports = {
-	setJoi,
-	getPluginOptionsSchema,
-	validateDefaultOptions,
-	validateJobOptions,
-};

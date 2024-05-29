@@ -1,4 +1,4 @@
-const { validateDefaultOptions } = require('./validator');
+import { validateDefaultOptions } from './validator';
 
 const jobQueue = [];
 
@@ -15,39 +15,30 @@ let defaultOptions = {
 	optimizeForSpeed: false,
 };
 
-function getDefaultOptions() {
+export function getDefaultOptions() {
 	return defaultOptions;
 }
 
-function setDefaultOptions(newDefaultOptions) {
+export function setDefaultOptions(newDefaultOptions) {
 	defaultOptions = validateDefaultOptions(newDefaultOptions, defaultOptions);
 
 	return defaultOptions;
 }
 
-function addJob(job) {
+export function addJob(job) {
 	jobQueue.push(job);
 }
 
-function getAllJobs() {
+export function getAllJobs() {
 	return jobQueue;
 }
 
 // Store the Gatsby createPage function to use later
-function setGatsbyCreatePageFunction(newGatsbyCreatePageFunction) {
+export function setGatsbyCreatePageFunction(newGatsbyCreatePageFunction) {
 	gatsbyCreatePageFunction = newGatsbyCreatePageFunction;
 }
 
 // Call the Gatsby createPage function
-function createPage(...args) {
+export function createPage(...args) {
 	return gatsbyCreatePageFunction(...args);
 }
-
-module.exports = {
-	getDefaultOptions,
-	setDefaultOptions,
-	addJob,
-	getAllJobs,
-	setGatsbyCreatePageFunction,
-	createPage,
-};

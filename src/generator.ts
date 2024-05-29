@@ -1,15 +1,16 @@
-const { existsSync, mkdirSync } = require('node:fs');
-const { join, resolve, dirname } = require('node:path');
-const { createServer } = require('node:http');
-const { launch } = require('puppeteer');
-const express = require('express');
-const { getAllJobs } = require('./config');
-const {
+import { existsSync, mkdirSync } from 'node:fs';
+import { join, resolve, dirname } from 'node:path';
+import { createServer } from 'node:http';
+import { launch } from 'puppeteer';
+import express from 'express';
+import { getAllJobs } from './config';
+import {
+
 	success,
 	startActivity,
 	updateActivity,
 	endActivity,
-} = require('./logger');
+} from './logger';
 
 // Constants
 const ROOT_DIR = 'public';
@@ -111,7 +112,7 @@ async function takedown(server, browser) {
 }
 
 // Generate images for all jobs in the queue
-async function generateImages() {
+export async function generateImages() {
 	startActivity('Generating images');
 	updateActivity('Setting up');
 
@@ -127,6 +128,3 @@ async function generateImages() {
 	success('Images generated successfully');
 }
 
-module.exports = {
-	generateImages,
-};
