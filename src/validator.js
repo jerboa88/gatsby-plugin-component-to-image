@@ -102,7 +102,7 @@ function validateJobOptions(newJobOptions, defaultOptions) {
 		imagePath: Joi.attempt(newJobOptions?.imagePath, newSchema.imagePath),
 		component: Joi.attempt(
 			newJobOptions?.component,
-			newSchema.component.required(),
+			schema.component.required(),
 		),
 		context: Joi.attempt(newJobOptions?.context, newSchema.context),
 		size: Joi.attempt(newJobOptions?.size, newSchema.size),
