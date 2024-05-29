@@ -22,7 +22,12 @@
 		"pdf-generation"
 	],
 	"license": "MIT",
-	"main": "./index.js",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"/dist",
+		"gatsby-node.js"
+	],
 	"homepage": "https://github.com/jerboa88/gatsby-plugin-component-to-image",
 	"repository": {
 		"type": "git",
@@ -31,11 +36,24 @@
 	"bugs": {
 		"url": "https://github.com/jerboa88/gatsby-plugin-component-to-image/issues"
 	},
+	"scripts": {
+		"build": "tsc",
+		"clean": "tsc --build --clean",
+		"prepare": "npm run build"
+	},
+	"peerDependencies": {
+		"gatsby": "^5.0.0-next"
+	},
 	"dependencies": {
 		"express": "^4.19.2",
 		"puppeteer": "^22.9.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "1.7.3"
+		"@biomejs/biome": "1.7.3",
+		"@tsconfig/node20": "^20.1.4",
+		"typescript": "^5.4.5"
+	},
+	"engines": {
+		"node": ">=20.0.0"
 	}
 }
