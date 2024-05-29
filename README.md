@@ -263,11 +263,30 @@ These options must be passed to the `createImage()` function.
 ## Contributing
 Contributions, issues, and forks are welcome. [SemVer](http://semver.org/) is used for versioning.
 
+This project is written in [TypeScript] so files in the `src/` directory need to be built when you make changes. Compiled JavaScript files can be found in the `dist/` directory.
+
+### Commands
+#### Build
+```sh
+npm run build
+```
+
+#### Build and watch for changes
+```sh
+npm run watch
+```
+
+#### Clean the build directory
+```sh
+npm run clean
+```
+
 
 ## License
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details. This project includes various resources which carry their own copyright notices and license terms. See [LICENSE-THIRD-PARTY.md](LICENSE-THIRD-PARTY.md) for more details.
 
 
+[Typescript]: https://www.typescriptlang.org/
 [Puppeteer]: https://pptr.dev/
 [vercel/satori]: https://github.com/vercel/satori
 [gatsby-plugin-open-graph-images]: https://github.com/squer-solutions/gatsby-plugin-open-graph-images/
