@@ -38,6 +38,7 @@
 	},
 	"scripts": {
 		"build": "tsc",
+		"watch": "tsc --watch",
 		"clean": "tsc --build --clean",
 		"prepare": "npm run build"
 	},
