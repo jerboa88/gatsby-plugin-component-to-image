@@ -70,31 +70,59 @@ export function setJoi(newJoi: PluginOptionsSchemaJoi) {
 	joi = newJoi;
 
 	schemas = {
-		verbose: joi.boolean().label('verbose'),
-		pagePath: joi.string().required().label('pagePath'),
-		imagePath: joi.string().required().label('imagePath'),
-		component: joi.string().label('component'),
-		context: joi.object().label('context'),
-		size: joi.object({
-			width: joi.number().integer().min(MIN_SIZE).max(MAX_SIZE).label('width'),
-			height: joi
-				.number()
-				.integer()
-				.min(MIN_SIZE)
-				.max(MAX_SIZE)
-				.label('height'),
+		verbose: joi.boolean().label('verbose').example(false),
+		pagePath: joi
+			.string()
+			.required()
+			.label('pagePath')
+			.example('/__generated/open-graph/blog-post-1'),
+		imagePath: joi
+			.string()
+			.required()
+			.label('imagePath')
+			.example('/images/open-graph/blog-post-1.png'),
+		component: joi
+			.string()
+			.label('component')
+			.example('./src/templates/blog-post.tsx'),
+		context: joi.object().label('context').example({
+			title: 'Blog Post 1',
+			description: 'This is a blog post',
+			postDate: '2022-01-01',
 		}),
+		size: joi
+			.object({
+				width: joi
+					.number()
+					.integer()
+					.min(MIN_SIZE)
+					.max(MAX_SIZE)
+					.label('width')
+					.example(1200),
+				height: joi
+					.number()
+					.integer()
+					.min(MIN_SIZE)
+					.max(MAX_SIZE)
+					.label('height')
+					.example(630),
+			})
+			.label('size')
+			.example({ width: 1200, height: 630 }),
 		type: joi
 			.string()
 			.valid(...FILE_TYPES)
-			.label('type'),
+			.lowercase()
+			.label('type')
+			.example('png'),
 		quality: joi
 			.number()
 			.integer()
 			.min(MIN_QUALITY)
 			.max(MAX_QUALITY)
-			.label('quality'),
-		optimizeForSpeed: joi.boolean().label('optimizeForSpeed'),
+			.label('quality')
+			.example(95),
+		optimizeForSpeed: joi.boolean().label('optimizeForSpeed').example(false),
 	};
 }
 
