@@ -1,16 +1,19 @@
 import { existsSync, mkdirSync } from 'node:fs';
-import { join, resolve, dirname } from 'node:path';
 import { createServer } from 'node:http';
-import { launch } from 'puppeteer';
+import type { IncomingMessage, Server, ServerResponse } from 'node:http';
+import { dirname, join, resolve } from 'node:path';
+import { URL } from 'node:url';
 import express from 'express';
+import type { Express } from 'express-serve-static-core';
+import { type Browser, launch } from 'puppeteer';
 import { getAllJobs } from './config';
-import {
+import { endActivity, startActivity, success, updateActivity } from './logger';
+import type { JobOptions } from './types';
 
-	success,
-	startActivity,
-	updateActivity,
-	endActivity,
-} from './logger';
+// Types
+type ExtendedJobOptions = JobOptions & {
+	pageEndpoint: string;
+};
 
 // Constants
 const ROOT_DIR = 'public';
@@ -20,7 +23,7 @@ const URL_HOSTNAME = '0.0.0.0';
 const PUPPETEER_WAIT_CONDITION = 'networkidle2';
 
 // Set up an endpoint for a page and add it to the job options
-function registerRoute(app, pagePath) {
+function registerRoute(app: Express, pagePath: JobOptions['pagePath']) {
 	const pageEndpoint = `/${ROOT_DIR}${pagePath}`;
 	const file = join(resolve('./'), ROOT_DIR, pagePath, PAGE_FILE_NAME);
 
@@ -32,7 +35,7 @@ function registerRoute(app, pagePath) {
 }
 
 // Given job options, create directories for imagePath if they don't exist
-function createDir(imagePath) {
+function createDir(imagePath: JobOptions['imagePath']) {
 	const directory = dirname(imagePath);
 
 	if (!existsSync(directory)) {
@@ -43,22 +46,29 @@ function createDir(imagePath) {
 }
 
 // Get all jobs, set up their page endpoints, and create directories for the output images
-function setUpJobs(app) {
-	return getAllJobs().map((jobOptions) => {
-		jobOptions.pageEndpoint = registerRoute(app, jobOptions.pagePath);
-		jobOptions.imagePath = join(ROOT_DIR, jobOptions.imagePath);
+function setUpJobs(app: Express) {
+	return getAllJobs().map((jobOptions): ExtendedJobOptions => {
+		const newImagePath = join(ROOT_DIR, jobOptions.imagePath);
 
-		createDir(jobOptions.imagePath);
+		createDir(newImagePath);
 
-		return jobOptions;
+		return {
+			...jobOptions,
+			imagePath: newImagePath,
+			pageEndpoint: registerRoute(app, jobOptions.pagePath),
+		};
 	});
 }
 
 // Take a screenshot of a page and save it to the file system
-async function processJob(browser, host, jobOptions) {
+async function processJob(
+	browser: Browser,
+	host: string,
+	extendedJobOptions: ExtendedJobOptions,
+) {
 	const { imagePath, size, pageEndpoint, type, quality, optimizeForSpeed } =
-		jobOptions;
-	const url = new URL(pageEndpoint, host);
+		extendedJobOptions;
+	const url = new URL(pageEndpoint, host).toString();
 	const page = await browser.newPage();
 
 	await page.setViewport(size);
@@ -98,14 +108,27 @@ async function setup() {
 
 	server.listen();
 
-	const host = `${URL_SCHEME}://${URL_HOSTNAME}:${server.address().port}`;
+	// This shouldn't be a string because we're not listening on a pipe or Unix domain socket
+	const serverAddress = server.address() as Exclude<
+		ReturnType<typeof server.address>,
+		string
+	>;
+
+	if (!serverAddress) {
+		throw new Error('Server failed to start');
+	}
+
+	const host = `${URL_SCHEME}://${URL_HOSTNAME}:${serverAddress.port}`;
 	const browser = await launch();
 
 	return { server, browser, host, jobList };
 }
 
 // Close the browser and server
-async function takedown(server, browser) {
+async function takedown(
+	server: Server<typeof IncomingMessage, typeof ServerResponse>,
+	browser: Browser,
+) {
 	await browser.close();
 
 	server.close();
@@ -127,4 +150,3 @@ export async function generateImages() {
 	endActivity();
 	success('Images generated successfully');
 }
-
