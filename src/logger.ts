@@ -2,7 +2,7 @@ import type { Reporter } from 'gatsby';
 import { getDefaultOptions } from './config';
 import { getPackageName } from './utilities';
 
-const LOG_PREFIX = `${getPackageName()}: `;
+const LOG_PREFIX = `${getPackageName()}: ` as const;
 
 let reporter: Reporter | undefined;
 let activity: ReturnType<Reporter['activityTimer']> | undefined;
