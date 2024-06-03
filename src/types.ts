@@ -6,8 +6,7 @@ type Size = {
 };
 
 // Common options
-export type CommonOptions = {
-	component: string | undefined;
+type CommonOptions = {
 	context: object;
 	size: Size;
 	type: FileType;
@@ -17,11 +16,13 @@ export type CommonOptions = {
 
 // Validated default options
 export type DefaultOptions = CommonOptions & {
+	component: string | undefined;
 	verbose: boolean;
 };
 
 // Validated job options
-export type JobOptions = Required<CommonOptions> & {
+export type JobOptions = CommonOptions & {
+	component: string;
 	pagePath: string;
 	imagePath: string;
 };
