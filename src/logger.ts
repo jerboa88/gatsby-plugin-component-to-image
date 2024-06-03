@@ -1,46 +1,47 @@
+import type { Reporter } from 'gatsby';
 import { getDefaultOptions } from './config';
 import { getPackageName } from './utilities';
 
 const LOG_PREFIX = `${getPackageName()}: `;
 
-let reporter;
-let activity;
+let reporter: Reporter | undefined;
+let activity: ReturnType<Reporter['activityTimer']> | undefined;
 
-export function setReporter(newReporter) {
+export function setReporter(newReporter: Reporter) {
 	reporter = newReporter;
 }
 
-export function info(message) {
+export function info(message: string) {
 	getDefaultOptions().verbose && reporter?.info(`${LOG_PREFIX}${message}`);
 }
 
-export function success(message) {
+export function success(message: string) {
 	reporter?.success(`${LOG_PREFIX}${message}`);
 }
 
-export function warn(message) {
+export function warn(message: string) {
 	reporter?.warn(`${LOG_PREFIX}${message}`);
 }
 
-export function error(message) {
+export function error(message: string) {
 	reporter?.error(`${LOG_PREFIX}${message}`);
 }
 
-export function panic(message) {
+export function panic(message: string) {
 	reporter?.panic(`${LOG_PREFIX}${message}`);
 }
 
-export function startActivity(timerText) {
+export function startActivity(timerText: string) {
 	activity = reporter?.activityTimer(`${LOG_PREFIX}${timerText}`);
 	activity?.start();
 }
 
-export function updateActivity(statusText) {
+export function updateActivity(statusText: string) {
 	activity?.setStatus(statusText);
 }
 
 export function endActivity() {
 	activity?.setStatus('');
 	activity?.end();
-	activity = null;
+	activity = undefined;
 }
