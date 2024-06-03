@@ -1,9 +1,10 @@
-import { setReporter, info } from './logger';
-import { setGatsbyCreatePageFunction, setDefaultOptions } from './config';
-import { generateImages } from './generator';
-import { setJoi, getPluginOptionsSchema } from './validator';
-import { prettify } from './utilities';
 import type { GatsbyNode } from 'gatsby';
+import { setDefaultOptions, setGatsbyCreatePageFunction } from './config';
+import { generateImages } from './generator';
+import { info, setReporter } from './logger';
+import type { DefaultOptions } from './types';
+import { prettify } from './utilities';
+import { getPluginOptionsSchema, setJoi } from './validator';
 
 // Save the reporter and createPage function for later use
 export const onPluginInit: GatsbyNode['onPluginInit'] = async ({
@@ -28,7 +29,10 @@ export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async (
 	_,
 	pluginOptions,
 ) => {
-	const defaultOptions = setDefaultOptions(pluginOptions);
+	// PluginOptions should be a superset of DefaultOptions
+	const defaultOptions = setDefaultOptions(
+		pluginOptions as unknown as Partial<DefaultOptions>,
+	);
 
 	info(`Default options set to:\n${prettify(defaultOptions)}`);
 };
