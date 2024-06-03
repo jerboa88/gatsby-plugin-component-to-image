@@ -1,17 +1,23 @@
+import {
+	addJob,
+	setDefaultOptions as configSetDefaultOptions,
+	createPage,
+	getDefaultOptions,
+} from './config';
 import { info } from './logger';
-import { getDefaultOptions, setDefaultOptions as configSetDefaultOptions, addJob, createPage } from './config';
-import { validateJobOptions } from './validator';
+import type { DefaultOptions, JobOptions } from './types';
 import { prettify } from './utilities';
+import { validateJobOptions } from './validator';
 
 // Public function for setting default options
-export function setDefaultOptions(options) {
+export function setDefaultOptions(options: Partial<DefaultOptions>) {
 	const defaultOptions = configSetDefaultOptions(options);
 
 	info(`Default options set to:\n${prettify(defaultOptions)}`);
 }
 
 // Public function for creating a single image
-export function createImage(options) {
+export function createImage(options: Partial<JobOptions>) {
 	const jobOptions = validateJobOptions(options, getDefaultOptions());
 
 	createPage({
