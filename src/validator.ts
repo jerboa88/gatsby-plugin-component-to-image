@@ -1,4 +1,3 @@
-import type { PluginOptions } from 'gatsby';
 import type { PluginOptionsSchemaJoi } from 'gatsby-plugin-utils';
 import type { DefaultOptions, JobOptions } from './types';
 import { assertIsDefined } from './utilities';
@@ -38,7 +37,7 @@ let joi: PluginOptionsSchemaJoi | undefined = undefined;
 let schemas: Schemas | undefined = undefined;
 
 function validateOptions<T>(
-	options: Partial<T> | PluginOptions,
+	options: Partial<T>,
 	fallbackOptions: DefaultOptions,
 	schemaTransformFuncs: Partial<{
 		[K in keyof Schemas]: (schema: Schemas[K]) => Schemas[K];
@@ -115,7 +114,7 @@ export function getPluginOptionsSchema() {
 }
 
 export function validateDefaultOptions(
-	newDefaultOptions: PluginOptions | Partial<DefaultOptions>,
+	newDefaultOptions: Partial<DefaultOptions>,
 	defaultOptions: DefaultOptions,
 ): DefaultOptions {
 	const schemaTransformFuncs: SchemaTransformFuncs = {
