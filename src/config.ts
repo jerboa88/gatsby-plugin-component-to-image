@@ -1,10 +1,13 @@
+import type { Actions } from 'gatsby';
+import type { DefaultOptions, JobOptions } from './types';
 import { validateDefaultOptions } from './validator';
 
-const jobQueue = [];
+const jobQueue: JobOptions[] = [];
 
-let gatsbyCreatePageFunction;
-let defaultOptions = {
+let gatsbyCreatePageFunction: Actions['createPage'];
+let defaultOptions: DefaultOptions = {
 	verbose: false,
+	component: undefined,
 	context: {},
 	size: {
 		width: 1200,
@@ -19,13 +22,15 @@ export function getDefaultOptions() {
 	return defaultOptions;
 }
 
-export function setDefaultOptions(newDefaultOptions) {
+export function setDefaultOptions(
+	newDefaultOptions: Partial<DefaultOptions>,
+): DefaultOptions {
 	defaultOptions = validateDefaultOptions(newDefaultOptions, defaultOptions);
 
 	return defaultOptions;
 }
 
-export function addJob(job) {
+export function addJob(job: JobOptions) {
 	jobQueue.push(job);
 }
 
@@ -34,11 +39,13 @@ export function getAllJobs() {
 }
 
 // Store the Gatsby createPage function to use later
-export function setGatsbyCreatePageFunction(newGatsbyCreatePageFunction) {
+export function setGatsbyCreatePageFunction(
+	newGatsbyCreatePageFunction: Actions['createPage'],
+) {
 	gatsbyCreatePageFunction = newGatsbyCreatePageFunction;
 }
 
 // Call the Gatsby createPage function
-export function createPage(...args) {
+export function createPage(...args: Parameters<Actions['createPage']>) {
 	return gatsbyCreatePageFunction(...args);
 }
