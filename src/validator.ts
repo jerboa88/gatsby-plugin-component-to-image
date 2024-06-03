@@ -1,6 +1,6 @@
 import type { PluginOptionsSchemaJoi } from 'gatsby-plugin-utils';
 import type { DefaultOptions, JobOptions } from './types';
-import { assertIsDefined } from './utilities';
+import { assertIsDefined } from './utils';
 
 // Types
 type BooleanSchema = ReturnType<PluginOptionsSchemaJoi['boolean']>;

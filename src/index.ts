@@ -6,7 +6,7 @@ import {
 } from './config';
 import { info } from './logger';
 import type { DefaultOptions, JobOptions } from './types';
-import { prettify } from './utilities';
+import { prettify } from './utils';
 import { validateJobOptions } from './validator';
 
 // Public function for setting default options
