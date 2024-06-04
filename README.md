@@ -276,6 +276,11 @@ npm run build
 npm run watch
 ```
 
+#### Run tests
+```sh
+npm run test
+```
+
 #### Clean the build directory
 ```sh
 npm run clean
