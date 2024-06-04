@@ -44,8 +44,8 @@ const DEFAULT_OPTIONS: DefaultOptions = {
 // otherwise it will not work as expected.
 beforeAll(() => {
 	// Set up the joi object
-	// Gatsby's PluginOptionsSchemaJoi type has an additional `subPlugins` property that we don't need
-	setJoi(Joi as unknown as PluginOptionsSchemaJoi);
+	// @ts-expect-error: Gatsby's PluginOptionsSchemaJoi type has an additional `subPlugins` property that we don't need
+	setJoi(Joi);
 });
 
 describe('Validator', () => {
