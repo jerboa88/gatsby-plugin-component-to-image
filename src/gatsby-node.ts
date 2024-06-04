@@ -3,7 +3,7 @@ import { setDefaultOptions, setGatsbyCreatePageFunction } from './config';
 import { generateImages } from './generator';
 import { info, setReporter } from './logger';
 import type { DefaultOptions } from './types';
-import { prettify } from './utilities';
+import { prettify } from './utils';
 import { getPluginOptionsSchema, setJoi } from './validator';
 
 // Save the reporter and createPage function for later use

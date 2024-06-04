@@ -1,6 +1,6 @@
 import type { Reporter } from 'gatsby';
 import { getDefaultOptions } from './config';
-import { getPackageName } from './utilities';
+import { getPackageName } from './utils';
 
 const LOG_PREFIX = `${getPackageName()}: ` as const;
 
