@@ -14,7 +14,7 @@
 </p>
 
 <p class="projectDesc">
-	A Gatsby plugin to generate images and PDFs from React components. Useful for dynamically generating Open Graph images, favicons, or documents.
+	A Gatsby plugin to generate images and PDFs from React components. Useful for dynamically generating Open Graph images, favicons, and more!
 </p>
 
 <br/>
@@ -23,21 +23,31 @@
 
 ## About
 
-### Why?
+This plugin was inspired by similar plugins for generating [Open Graph] images like [gatsby-plugin-open-graph-images], [gatsby-plugin-satorare], and [gatsby-remark-twitter-cards], but is designed to easier to use and more customizable so that it can be used for more than just generating social images.
 
-This plugin was inspired by similar plugins for generating Open Graph images like [gatsby-plugin-open-graph-images], [gatsby-plugin-satorare], and [gatsby-remark-twitter-cards], but is designed to be more flexible:
-- Unlike [gatsby-remark-twitter-cards], the card style is not limited by the plugin options. You can create a component for your Open Graph image with the exact style you want, and then use this plugin to generate the image.
-- [gatsby-plugin-satorare] used [vercel/satori] internally to generate SVG images from your JSX markup, which is very cool, but there are some limitations with this approach:
-	- Satori only accepts JSX elements that are pure and stateless, which will cause issues if you use hooks or context in your component.
-	- Satori only supports a subset of the CSS spec, so your component may not render as expected if you use unsupported CSS properties.
-	- Using CSS-in-JS libraries like Tailwind CSS or Styled Components requires complex setup to get working with Satori, and rewriting your component with inline styles is not always feasible.
-	
-	This plugin uses [Puppeteer] to render your component in a headless browser, so any React component should work with this plugin.
-- Unlike [gatsby-plugin-open-graph-images], you have full control over the output path and file type of the generated images. The path of the generated pages can also be set so that you can exclude them from your sitemap, or reuse them for other purposes. Because of this, you can use this plugin to generate images for any purpose, not just Open Graph images.
+### Features
+- **🚀 Works with any [React] component** : Generate images from any valid React component
+	- Pass data to the component to customize the content, style, or layout of the generated images per page
+	- Not limited by available plugin options like [gatsby-remark-twitter-cards]
+	- Not limited by types of JSX elements or CSS properties supported by the plugin like [gatsby-plugin-satorare]
+- **📷 Configurable output filetypes**: Generate PNG, JPEG, or WebP images, as well as PDFs
+	- Set the quality of the generated images
+	- Optimize images for speed or file size
+- **📂 Customizable output paths**: Full control over paths of the generated pages and images
+	- Set the path of the generated pages so that you can exclude them from your sitemap, or reuse them for other purposes
+	- Save images to a separate directory
+- **🎛️ Default options**: Reuse the same options for multiple images
+	- Set default options when adding the plugin to `gatsby-config.js`
+	- Call the `setDefaultOptions()` function in `gatsby-node.js` to set them programmatically
 
-### How?
-1. When you call the `createImage` function from `gatsby-node.js`, we save the options for that image/PDF and generate a regular Gatsby page from the component you provided.
-2. When the page is built, we use Puppeteer to render the page in a headless browser and, using the options you provided, either:
+### Use cases
+- **🏞️ Social images**: Use your existing React components to generate Open Graph images and/or Twitter cards for your blog posts or other content
+- **🖼️ Favicons**: Dynamically generate favicons for your website
+- **📄 Documents**: Create PDF files for reports, invoices, resumes, or other documents
+
+### How it works
+1. When you call the `createImage()` function from `gatsby-node.js`, we save the options for that image/PDF and generate a regular [Gatsby] page from the component you provided.
+2. When the page is built, we use [Puppeteer] to render the page in a headless browser and, using the options you provided, either:
    1. save a screenshot of the rendered component as an image, or
    2. print the page to a PDF file
 
@@ -291,9 +301,12 @@ npm run clean
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details. This project includes various resources which carry their own copyright notices and license terms. See [LICENSE-THIRD-PARTY.md](LICENSE-THIRD-PARTY.md) for more details.
 
 
-[Typescript]: https://www.typescriptlang.org/
-[Puppeteer]: https://pptr.dev/
-[vercel/satori]: https://github.com/vercel/satori
 [gatsby-plugin-open-graph-images]: https://github.com/squer-solutions/gatsby-plugin-open-graph-images/
 [gatsby-plugin-satorare]: https://github.com/okaryo/gatsby-plugin-satorare
 [gatsby-remark-twitter-cards]: https://github.com/alessbell/gatsby-remark-twitter-cards
+[Gatsby]: https://www.gatsbyjs.com/
+[Open Graph]: https://ogp.me/
+[Puppeteer]: https://pptr.dev/
+[React]: https://react.dev/
+[Typescript]: https://www.typescriptlang.org/
+[vercel/satori]: https://github.com/vercel/satori
