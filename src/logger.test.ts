@@ -1,8 +1,25 @@
-import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import {
+	beforeAll,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	jest,
+} from '@jest/globals';
 import type { Reporter } from 'gatsby';
 import Joi from 'joi';
 import { setDefaultOptions } from './config';
-import { error, info, panic, setReporter, success, warn } from './logger';
+import {
+	endActivity,
+	error,
+	info,
+	panic,
+	setReporter,
+	startActivity,
+	success,
+	updateActivity,
+	warn,
+} from './logger';
 import { setJoi } from './validator';
 
 describe('info', () => {
@@ -91,5 +108,42 @@ describe('panic', () => {
 		expect(reporter.panic).toHaveBeenCalledWith(
 			'gatsby-plugin-component-to-image: This is a panic message',
 		);
+	});
+});
+
+describe('startActivity, updateActivity, and endActivity', () => {
+	const reporter = {
+		activityTimer: jest.fn(),
+	};
+	const activity = {
+		start: jest.fn(),
+		setStatus: jest.fn(),
+		end: jest.fn(),
+	};
+
+	beforeAll(() => {
+		reporter.activityTimer.mockReturnValue(activity);
+
+		// @ts-expect-error: Reporter is intentially not fully mocked
+		setReporter(reporter);
+	});
+
+	it('startActivity should start an activity', () => {
+		startActivity('Timer');
+		expect(reporter.activityTimer).toHaveBeenCalledWith(
+			'gatsby-plugin-component-to-image: Timer',
+		);
+		expect(activity.start).toHaveBeenCalled();
+	});
+
+	it('updateActivity should update the status of an activity', () => {
+		updateActivity('Status');
+		expect(activity.setStatus).toHaveBeenCalledWith('Status');
+	});
+
+	it('endActivity should end an activity', () => {
+		endActivity();
+		expect(activity.setStatus).toHaveBeenCalledWith('');
+		expect(activity.end).toHaveBeenCalled();
 	});
 });
