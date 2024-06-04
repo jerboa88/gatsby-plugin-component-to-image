@@ -1,2 +1,2 @@
-// Proxy to the dist/gatsby-node.js file
-module.exports = require('./dist/gatsby-node');
+// Proxy to the lib/gatsby-node.js file
+module.exports = require('./lib/gatsby-node');

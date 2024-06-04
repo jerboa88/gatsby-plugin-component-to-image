@@ -22,10 +22,10 @@
 		"pdf-generation"
 	],
 	"license": "MIT",
-	"main": "dist/index.js",
-	"types": "dist/index.d.ts",
+	"main": "lib/index.js",
+	"types": "lib/index.d.ts",
 	"files": [
-		"/dist",
+		"/lib",
 		"gatsby-node.js"
 	],
 	"homepage": "https://github.com/jerboa88/gatsby-plugin-component-to-image",
