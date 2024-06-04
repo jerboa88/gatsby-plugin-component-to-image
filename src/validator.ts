@@ -173,7 +173,7 @@ export function validateJobOptions(
 		context: (schema) => schema,
 		size: (schema) => schema.required(),
 		type: (schema) => schema.required(),
-		quality: (schema) => schema.required(),
+		quality: (schema) => schema,
 		optimizeForSpeed: (schema) => schema.required(),
 	};
 
