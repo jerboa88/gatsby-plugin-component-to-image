@@ -7,6 +7,7 @@
 <p class="projectBadges">
 	<img src="https://img.shields.io/badge/type-Gatsby_Plugin-8a4baf.svg" alt="Project type" title="Project type">
 	<img src="https://img.shields.io/github/languages/top/jerboa88/gatsby-plugin-component-to-image.svg" alt="Language" title="Language">
+	<img src="https://img.shields.io/npm/v/gatsby-plugin-component-to-image" alt="View package on npmjs" title="View package on npmjs">
 	<img src="https://img.shields.io/github/repo-size/jerboa88/gatsby-plugin-component-to-image.svg" alt="Repository size" title="Repository size">
 	<a href="LICENSE">
 		<img src="https://img.shields.io/github/license/jerboa88/gatsby-plugin-component-to-image.svg" alt="Project license" title="Project license"/>
