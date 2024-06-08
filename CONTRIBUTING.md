@@ -31,12 +31,16 @@ To contribute to this project, you will need to have the following tools install
 After installing the prerequisites and cloning the repository, you can install the project dependencies by running `pnpm install`.
 
 ### Building
-This project is built using [TypeScript], so after making changes to the source code in `src/`, you will need to run `pnpm build` to compile the changes. Compiled JavaScript files and type definitions will be output to the `lib/` directory.
+This project is built using [TypeScript]. Running `pnpm build` will compile source code in the `src/` directory and output the compiled JavaScript files to the `lib/` directory, along with type definitions.
 
-`pnpm watch` can be used to automatically recompile the project when changes are made.
+When developing locally, keep in mind that the project will not automatically recompile when changes are made to the source code. You can run `pnpm watch` to automatically recompile the project when you save changes to a file.
 
 ### Testing
 While developing, you can run `pnpm test` to run the test suite. This will also generate a coverage report in the `coverage/` directory.
+
+Tests are run on the source `.ts` files, so there is no need to build the project before running tests.
+
+Please ensure that all tests pass and that the coverage does not decrease before opening a pull request.
 
 ### Cleaning
 If you need to clean the project directory, you can run `pnpm clean` to remove the `dist/` directory and any other generated files.
