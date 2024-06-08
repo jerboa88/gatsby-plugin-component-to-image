@@ -7,12 +7,12 @@ on:
   release:
     types: [released]
 
+env:
+  NODE_VERSION: 22
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [22]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,10 +23,10 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
-      - name: Setup Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
 
       - name: Install dependencies
@@ -51,10 +51,10 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
-      - name: Setup Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
           registry-url: https://registry.npmjs.org/
 
@@ -82,10 +82,10 @@ jobs:
         - name: Install pnpm
           uses: pnpm/action-setup@v4
 
-        - name: Setup Node.js ${{ matrix.node-version }}
+        - name: Setup Node.js ${{ env.NODE_VERSION }}
           uses: actions/setup-node@v4
           with:
-            node-version: ${{ matrix.node-version }}
+            node-version: ${{ env.NODE_VERSION }}
             cache: pnpm
             registry-url: https://npm.pkg.github.com/
 
