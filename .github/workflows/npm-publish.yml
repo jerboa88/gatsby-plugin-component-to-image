@@ -40,33 +40,3 @@ jobs:
         run: pnpm publish --provenance --no-git-checks --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-
-  publish-gpr:
-      runs-on: ubuntu-latest
-      permissions:
-        contents: read
-        packages: write
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
-
-        - name: Enable corepack
-          run: corepack enable
-
-        - name: Install pnpm
-          uses: pnpm/action-setup@v4
-
-        - name: Setup Node.js ${{ env.NODE_VERSION }}
-          uses: actions/setup-node@v4
-          with:
-            node-version: ${{ env.NODE_VERSION }}
-            cache: pnpm
-            registry-url: https://npm.pkg.github.com/
-
-        - name: Install dependencies
-          run: pnpm install --frozen-lockfile
-        
-        - name: Publish to registry
-          run: npm publish --access public
-          env:
-            NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
