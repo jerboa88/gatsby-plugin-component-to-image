@@ -10,13 +10,30 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Enable corepack
+        run: corepack enable
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
-          node-version: 22
-      - run: npm ci
-      - run: npm test
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
 
   publish-npm:
     needs: build
@@ -25,13 +42,27 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Enable corepack
+        run: corepack enable
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
-      - run: npm publish --provenance --access public
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Publish to registry
+        run: pnpm publish --provenance --no-git-checks --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
@@ -42,12 +73,26 @@ jobs:
         contents: read
         packages: write
       steps:
-        - uses: actions/checkout@v4
-        - uses: actions/setup-node@v4
+        - name: Checkout
+          uses: actions/checkout@v4
+
+        - name: Enable corepack
+          run: corepack enable
+
+        - name: Install pnpm
+          uses: pnpm/action-setup@v4
+
+        - name: Setup Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v4
           with:
-            node-version: 22
+            node-version: ${{ matrix.node-version }}
+            cache: pnpm
             registry-url: https://npm.pkg.github.com/
-        - run: npm ci
-        - run: npm publish --access public
+
+        - name: Install dependencies
+          run: pnpm install --frozen-lockfile
+        
+        - name: Publish to registry
+          run: pnpm publish --no-git-checks --access public
           env:
             NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
