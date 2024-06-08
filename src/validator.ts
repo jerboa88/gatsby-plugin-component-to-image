@@ -55,6 +55,7 @@ function validateOptions<T>(
 		const fallbackValue =
 			fallbackOptions?.[optionName as keyof typeof fallbackOptions];
 		const schema = schemas[optionName as keyof Schemas];
+		// @ts-expect-error: TODO: Fix this type error in #15
 		const newSchema = schemaTransformFunc(schema);
 
 		resultMap[optionName as keyof T] = joi.attempt(
