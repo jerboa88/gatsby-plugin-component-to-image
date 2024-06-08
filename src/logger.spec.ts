@@ -52,7 +52,7 @@ describe('info', () => {
 });
 
 describe('success', () => {
-	it('should log a success message', () => {
+	it.concurrent('should log a success message', async () => {
 		const reporter = {
 			success: jest.fn(),
 		};
@@ -67,7 +67,7 @@ describe('success', () => {
 });
 
 describe('warn', () => {
-	it('should log a warning message', () => {
+	it.concurrent('should log a warning message', async () => {
 		const reporter = {
 			warn: jest.fn(),
 		};
@@ -82,7 +82,7 @@ describe('warn', () => {
 });
 
 describe('error', () => {
-	it('should log an error message', () => {
+	it.concurrent('should log an error message', async () => {
 		const reporter = {
 			error: jest.fn(),
 		};
@@ -97,7 +97,7 @@ describe('error', () => {
 });
 
 describe('panic', () => {
-	it('should log a panic message', () => {
+	it.concurrent('should log a panic message', async () => {
 		const reporter = {
 			panic: jest.fn(),
 		};
