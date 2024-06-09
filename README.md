@@ -1,5 +1,5 @@
 <!-- Project Header -->
-<div align="center"> 
+<div align="center">
 <img class="projectLogo" src="icon.svg" alt="Project logo" title="Project logo" width="256">
 
 <h1 class="projectName">Gatsby Plugin: Component to Image</h1>
@@ -7,7 +7,9 @@
 <p class="projectBadges">
 	<img src="https://img.shields.io/badge/type-Gatsby_Plugin-8a4baf.svg" alt="Project type" title="Project type">
 	<img src="https://img.shields.io/github/languages/top/jerboa88/gatsby-plugin-component-to-image.svg" alt="Language" title="Language">
-	<img src="https://img.shields.io/npm/v/gatsby-plugin-component-to-image" alt="View package on npmjs" title="View package on npmjs">
+	<a href="https://www.npmjs.com/package/gatsby-plugin-component-to-image">
+		<img src="https://img.shields.io/npm/v/gatsby-plugin-component-to-image" alt="View package on npmjs" title="View package on npmjs"/>
+	</a>
 	<img src="https://img.shields.io/github/repo-size/jerboa88/gatsby-plugin-component-to-image.svg" alt="Repository size" title="Repository size">
 	<a href="LICENSE">
 		<img src="https://img.shields.io/github/license/jerboa88/gatsby-plugin-component-to-image.svg" alt="Project license" title="Project license"/>
@@ -138,7 +140,7 @@ This plugin can be used for a variety of purposes, but we will show you how to u
 	```
 
 	The `pageContext` prop is passed to the component by Gatsby when the image is generated. It contains details about the generated image in `imageMetadata` that you can use to style your component, as well as any other data you passed to the `createImage()` function via the `context` prop.
-	
+
 	In this example, we use the `size` property from `imageMetadata` to set the maximum width and height of the image, and we use the `title`, `description`, and `postDate` properties from `pageContext` to customize the content of the image for each blog post.
 
 2. Call the `createImage()` function from `gatsby-node.js` with your desired options:
