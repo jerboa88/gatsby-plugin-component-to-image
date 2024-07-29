@@ -16,7 +16,7 @@
 	</a>
 </p>
 
-<p class="projectDesc">
+<p class="projectDesc" data-exposition="A plugin for the React-based Gatsby framework that allows users to generate images and PDFs from React components. Created as a more powerful, full-featured alternative to existing Gatsby plugins that perform similar functions, this project allowed me to deepen my understanding of the Gatsby lifecycle APIs. It is released on NPM and the Gatsby Plugin Library for others to use.">
 	A Gatsby plugin to generate images and PDFs from React components. Useful for dynamically generating Open Graph images, favicons, and more!
 </p>
 
