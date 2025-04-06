@@ -6,7 +6,8 @@
 	"category": "Plugin",
 	"subcategory": "Gatsby",
   "technologies": [
-    "Gatsby"
+    "Gatsby",
+		"React"
   ],
   "schema": {
     "type": "Software",
