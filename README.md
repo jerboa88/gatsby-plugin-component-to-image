@@ -5,7 +5,7 @@
 <h1 class="projectName">Gatsby Plugin: Component to Image</h1>
 
 <p class="projectBadges">
-	<img src="https://img.shields.io/badge/type-Gatsby_Plugin-8a4baf.svg" alt="Project type" title="Project type">
+	<img src="https://johng.io/badges/category/Plugin.svg" alt="Project category" title="Project category">
 	<img src="https://img.shields.io/github/languages/top/jerboa88/gatsby-plugin-component-to-image.svg" alt="Language" title="Language">
 	<a href="https://www.npmjs.com/package/gatsby-plugin-component-to-image">
 		<img src="https://img.shields.io/npm/v/gatsby-plugin-component-to-image" alt="View package on npmjs" title="View package on npmjs"/>
