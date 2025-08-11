@@ -263,6 +263,7 @@ These options must either be set via the plugin options in `gatsby-config.js` or
 | ---------- | ---------------------------------- | ---------- | ----------- |
 | `verbose`  | Whether to enable verbose logging. | _optional_ | false       |
 
+
 #### Job Options
 
 These options must be passed to the `createImage()` function.
@@ -279,6 +280,10 @@ Contributions, issues, and forks are welcome. See [CONTRIBUTING.md](CONTRIBUTING
 
 ## 🧾 License
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details. This project includes various resources which carry their own copyright notices and license terms. See [LICENSE-THIRD-PARTY.md](LICENSE-THIRD-PARTY.md) for more details.
+
+
+## 🖇️ Related
+- **[johng.io](https://johng.io)**: My personal/portfolio site, which uses this plugin for social image generation.
 
 
 ## 💕 Funding
