@@ -24,7 +24,7 @@
 </div>
 
 
-## About
+## 👋 About
 
 This plugin was inspired by similar plugins for generating [Open Graph] images like [gatsby-plugin-open-graph-images], [gatsby-plugin-satorare], and [gatsby-remark-twitter-cards], but is designed to easier to use and more customizable so that it can be used for more than just generating social images.
 
@@ -55,7 +55,7 @@ This plugin was inspired by similar plugins for generating [Open Graph] images l
    2. print the page to a PDF file
 
 
-## Installation
+## 📦 Installation
 1. Install the plugin with your favorite package manager:
 
 	```sh
@@ -103,7 +103,7 @@ This plugin was inspired by similar plugins for generating [Open Graph] images l
 	```
 
 
-## Usage
+## 🕹️ Usage
 
 This plugin can be used for a variety of purposes, but we will show you how to use it to generate Open Graph images for your blog posts as an example:
 
@@ -273,11 +273,11 @@ These options must be passed to the `createImage()` function.
 | `imagePath` | The destination path of the image itself, relative to the `/public` directory. This should include the file extension of the image.                                                                                             | **required** |             |
 
 
-## Contributing
+## 🤝 Contributing
 Contributions, issues, and forks are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
 
 
-## License
+## 🧾 License
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details. This project includes various resources which carry their own copyright notices and license terms. See [LICENSE-THIRD-PARTY.md](LICENSE-THIRD-PARTY.md) for more details.
 
 
